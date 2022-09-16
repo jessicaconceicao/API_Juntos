@@ -16,7 +16,7 @@ namespace API_Juntos.Infra.Database
             builder.ToTable("produtos");
             builder.HasKey(pk => pk.IdProduto);
             builder.Property(p => p.Nome)
-                .HasColumnType("VARCHAR(20")
+                .HasColumnType("VARCHAR(20)")
                 .IsRequired();
             builder.Property(p => p.Lote)
                 .HasColumnType("VARCHAR(15)")

@@ -52,7 +52,7 @@ namespace API_e_commerce_Juntos
         {
 
             services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            //services.AddTransient<IProdutoRepository, ProdutoRepository>();
            // services.AddTransient<IUseCaseAsync<InserirClienteRequest, InserirClienteResponse>, InserirClienteUseCase>();
            // //services.AddTransient<IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse>, AtualizarClienteUseCase>();
            // services.AddTransient<IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse>, ExcluirClienteUseCase>();
@@ -92,7 +92,7 @@ namespace API_e_commerce_Juntos
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API_e_commerce_Juntos v1"));
             }
 
-            context.Database.Migrate();
+            //context.Database.Migrate();
 
             app.UseHttpsRedirection();
 

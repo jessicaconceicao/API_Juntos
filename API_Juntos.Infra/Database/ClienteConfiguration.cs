@@ -16,7 +16,7 @@ namespace API_Juntos.Infra.Database
             builder.ToTable("clientes");
             builder.HasKey(pk => pk.IdCliente);
             builder.Property(p => p.Nome)
-                .HasColumnType("VARCHAR(100")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
             builder.Property(p => p.CPF)
                 .HasColumnType("VARCHAR(15)")

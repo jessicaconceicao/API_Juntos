@@ -14,6 +14,7 @@ namespace API_Juntos.Infra.Database
         public void Configure(EntityTypeBuilder<ProdutosDoPedido> builder)
         {
             builder.ToTable("produtosDosPedidos");
+            builder.HasKey(pk => pk.IdProdutosDoPedido);
             builder.Property(p => p.Quantidade)
                 .HasColumnType("DECIMAL")
                 .IsRequired();
