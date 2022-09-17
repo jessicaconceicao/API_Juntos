@@ -1,38 +1,48 @@
-﻿//using API_Juntos.Application.Models.Pedidos.InserirPedido;
-//using API_Juntos.Core.Entidades;
-//using API_Juntos.Core.Repositorios;
-//using AutoMapper;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using API_Juntos.Application.Models.Pedidos.InserirPedido;
+using API_Juntos.Core.Entidades;
+using API_Juntos.Core.Repositorios;
+using AutoMapper;
+using System;
+using System.Threading.Tasks;
 
-//namespace API_Juntos.Application.UseCases.Pedidos
-//{
-//    public class InserirPedidoUseCase : IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse>
-//    {
-//        private readonly IPedidoRepository _repository;
-//        private readonly IMapper _mapper;
+namespace API_Juntos.Application.UseCases.Pedidos
+{
+    public class InserirPedidoUseCase : IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse>
+    {
+        private readonly IPedidoRepository _repository;
+        private readonly IMapper _mapper;
 
-//        public InserirPedidoUseCase(IPedidoRepository repository, IMapper mapper)
-//        {
-//            _repository = repository;
-//            _mapper = mapper;
-//        }
+        public InserirPedidoUseCase(IPedidoRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
 
-//        public async Task<InserirPedidoResponse> ExecuteAsync(InserirPedidoRequest request)
-//        {
-//            if (request == null)
-//            { return null; }
+        public async Task<InserirPedidoResponse> ExecuteAsync(InserirPedidoRequest request)
+        {
+            var validator = new InserirPedidoRequestValidator();
+            var validatorResults = validator.Validate(request);
 
-//            var pedido = _mapper.Map<Pedido>(request);
+            if (!validatorResults.IsValid)
+            {
+                var validatorErros = string.Empty;
+                foreach (var error in validatorResults.Errors)
+                    validatorErros += error.ErrorMessage + " | ";
 
-//            await _repository.Inserir(pedido);
+                throw new Exception(validatorErros);
+            }
 
-//            return new InserirPedidoResponse();
+            if (request == null)
+            { return null; }
 
-//        }
-//        // VER ONDE SOMAR O VALOR DOS ITENS PARA QUE SE OBTENHA O TOTAL DO PEDIDO????? MÉTODO NA INTERFACE?
-//    }
-//}
+            var pedido = _mapper.Map<Pedido>(request);
+
+            await _repository.Inserir(pedido); //COMO ATRIBUIR DATETIME.NOW?????/
+            pedido.DataPedido = DateTime.Now;
+
+            return new InserirPedidoResponse();
+
+        }
+        
+    }
+}

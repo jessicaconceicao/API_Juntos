@@ -1,4 +1,4 @@
-﻿/*using API_Juntos.Application.Models.Usuario.AtualizarUsuario;
+﻿/*using API_Juntos.Application.Models.Cliente.AtualizarCliente;
 using API_Juntos.Core.Repositorios;
 using AutoMapper;
 using System;
@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API_Juntos.Application.UseCases.Usuarios
+namespace API_Juntos.Application.UseCases.Clientes
 {
-    public class AtualizarUsuarioUseCase : IUseCaseAsync<AtualizarUsuarioRequest, AtualizarUsuarioResponse>
+    public class AtualizarUsuarioUseCase : IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse>
     {
         private readonly IUsuarioRepository _repository;
         private readonly IMapper _mapper;

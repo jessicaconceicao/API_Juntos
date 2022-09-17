@@ -1,59 +1,57 @@
-﻿//using API_Juntos.Core.Entidades;
-//using API_Juntos.Core.Repositorios;
-//using API_Juntos.Infra.Database;
-//using Microsoft.EntityFrameworkCore;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using API_Juntos.Core.Entidades;
+using API_Juntos.Core.Repositorios;
+using API_Juntos.Infra.Database;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-//namespace API_Juntos.Infra.Repositorios
-//{
-//    public class PedidoRepository : IPedidoRepository
-//    {
-//        private readonly ApplicationContext _context;
+namespace API_Juntos.Infra.Repositorios
+{
+    public class PedidoRepository : IPedidoRepository
+    {
+        private readonly ApplicationContext _context;
 
-//        public PedidoRepository(ApplicationContext context)
-//        {
-//            _context = context;
-//        }
+        public PedidoRepository(ApplicationContext context)
+        {
+            _context = context;
+        }
 
 
-//        /*public async Task Atualizar(Pedido obj)
-//        {
-//            throw new NotImplementedException();
-//        }*/
-//        public async Task Excluir(Pedido obj)
-//        {
-//            _context.Remove(obj);
-//            _context.SaveChanges();
-//        }
+        /*public async Task Atualizar(Pedido obj)
+        {
+            throw new NotImplementedException();
+        }*/
+        public async Task Excluir(Pedido obj)
+        {
+            _context.Remove(obj);
+            _context.SaveChanges();
+        }
 
-//        public async Task Inserir(Pedido obj) //COMO SERÃO ESPECIFICADOS OS ITENS A SEREM SOLICITADOS NO PEDIDO?????
-//        {
-//            _context.Add(obj);
-//            _context.SaveChanges();
-//        }
-        
-//        public async Task<Pedido> ListarPorId(int id)
-//        {
-//            return await _context
-//                .Pedidos
-//                .Where(p => p.IdPedido == id)
-//                .AsNoTracking()
-//                .FirstOrDefaultAsync();
-//        }
+        public async Task Inserir(Pedido obj) 
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
 
-//        public async Task<IEnumerable<Pedido>> ListarTodos()
-//        {
-//            return await _context
-//                .Pedidos
-//                .Include(i => i.Cliente)
-//                .AsNoTracking()
-//                .ToListAsync();
-//        }
+        public async Task<Pedido> ListarPorId(int id)
+        {
+            return await _context
+                .Pedidos
+                .Where(p => p.IdPedido == id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
 
-        
-//    }
-//}
+        public async Task<IEnumerable<Pedido>> ListarTodos()
+        {
+            return await _context
+                .Pedidos
+                .Include(i => i.Cliente)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+
+    }
+}

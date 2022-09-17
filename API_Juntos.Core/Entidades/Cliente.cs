@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace API_Juntos.Core.Entidades
 {
@@ -14,7 +10,7 @@ namespace API_Juntos.Core.Entidades
         public string Email { get; set; }
         public string Telefone { get; set; }
         public string Endereco { get; set; }
-        public List<Pedido> Pedidos { get; set; } //mantém?
+        public List<Pedido> Pedidos { get; set; } 
 
     }
 }

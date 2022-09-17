@@ -1,38 +1,47 @@
-﻿//using API_Juntos.Application.Models.Produtos.AdicionarProduto;
-//using API_Juntos.Core.Entidades;
-//using API_Juntos.Core.Repositorios;
-//using AutoMapper;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using API_Juntos.Application.Models.Produtos.InserirProduto;
+using API_Juntos.Core.Entidades;
+using API_Juntos.Core.Repositorios;
+using AutoMapper;
+using System;
+using System.Threading.Tasks;
 
-//namespace API_Juntos.Application.UseCases.Produtos
-//{
-//    public class InserirProdutoUseCase : IUseCaseAsync<InserirProdutoRequest, InserirProdutoResponse>
-//    {
-       
-//            private readonly IProdutoRepository _repository;
-//            private readonly IMapper _mapper;
+namespace API_Juntos.Application.UseCases.Produtos
+{
+    public class InserirProdutoUseCase : IUseCaseAsync<InserirProdutoRequest, InserirProdutoResponse>
+    {
 
-//            public InserirProdutoUseCase(IProdutoRepository repository, IMapper mapper)
-//            {
-//                _repository = repository;
-//                _mapper = mapper;
-//            }
+        private readonly IProdutoRepository _repository;
+        private readonly IMapper _mapper;
 
-//            public async Task<InserirProdutoResponse> ExecuteAsync(InserirProdutoRequest request)
-//            {
-//                //validar com o fluent validation?
-//                if (request == null)
-//                { return null; }
+        public InserirProdutoUseCase(IProdutoRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
 
-//                var produto = _mapper.Map<Produto>(request); //mapeando o que chega do request para Produto
+        public async Task<InserirProdutoResponse> ExecuteAsync(InserirProdutoRequest request)
+        {
+            var validator = new InserirProdutoRequestValidator();
+            var validatorResults = validator.Validate(request);
 
-//                await _repository.Inserir(produto); //acessa instância do repositório,chamando método Inserir(), passando os dados do mapeamento como parâmetro
-//                return new InserirProdutoResponse();
-//            }
-        
-//    }
-//}
+            if (!validatorResults.IsValid)
+            {
+                var validatorErros = string.Empty;
+                foreach (var error in validatorResults.Errors)
+                    validatorErros += error.ErrorMessage + " | ";
+
+                throw new Exception(validatorErros);
+            }
+
+            if (request == null)
+            { return null; }
+
+            var produto = _mapper.Map<Produto>(request); 
+            
+            await _repository.Inserir(produto); 
+            
+            return new InserirProdutoResponse();
+        }
+
+    }
+}

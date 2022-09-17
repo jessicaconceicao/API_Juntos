@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace API_Juntos.Core.Entidades
 {
@@ -15,12 +11,7 @@ namespace API_Juntos.Core.Entidades
         public decimal QuantidadeEmbalagem{ get; set; }
         public decimal Valor { get; set; }
         public decimal QuantidadeEstoque { get; set; }
-        public List<ProdutosDoPedido> PodutosDoPedido { get; set; } //seria lista de produtos?
-        
-        
-        //entrada?
-        //devolução?
-
+        public List<ProdutosDoPedido> PodutosDoPedido { get; set; }
 
     }
 }

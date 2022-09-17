@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API_Juntos.Core.Entidades
 {
@@ -14,9 +11,6 @@ namespace API_Juntos.Core.Entidades
         public List<ProdutosDoPedido> ProdutosDoPedido { get; set; } 
         public int IdCliente { get; set; }
         public Cliente Cliente { get; set; }
-
-        // public bool Entrega { get; set; }//status do pedido????
-
-
+            
     }
 }
