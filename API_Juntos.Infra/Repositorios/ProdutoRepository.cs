@@ -39,7 +39,6 @@ namespace API_Juntos.Infra.Repositorios
             return await _context
                 .Produtos
                 .Where(x => x.IdProduto == id)
-                .Include(i => i.PodutosDoPedido)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
