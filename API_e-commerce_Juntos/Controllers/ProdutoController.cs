@@ -4,6 +4,7 @@ using API_Juntos.Application.Models.Produtos.InserirProduto;
 using API_Juntos.Application.Models.Produtos.ListarProdutoPorId;
 using API_Juntos.Application.Models.Produtos.ListarProdutos;
 using API_Juntos.Application.UseCases;
+using API_Juntos.Application.UseCases.Produtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace API_e_commerce_Juntos.Controllers
         private readonly IUseCaseAsync<ExcluirProdutoRequest, ExcluirProdutoResponse> _useCaseExcluir;
         private readonly IUseCaseAsync<ListarProdutoPorIdRequest, ListarProdutoPorIdResponse> _useCaseListarPorId;
         private readonly IUseCaseAsync<ListarProdutosRequest, List<ListarProdutosResponse>> _useCaseListarProdutos;
+        
 
         public ProdutoController(IUseCaseAsync<InserirProdutoRequest, InserirProdutoResponse> useCaseInserir,
            /* IUseCaseAsync<AtualizarProdutoRequest, AtualizarProdutoResponse> useCaseAtualizar,*/
@@ -26,6 +28,7 @@ namespace API_e_commerce_Juntos.Controllers
             IUseCaseAsync<ListarProdutoPorIdRequest, ListarProdutoPorIdResponse> useCaseListarPorId,
             IUseCaseAsync<ListarProdutosRequest, List<ListarProdutosResponse>> useCaseListarProdutos)
         {
+            
             _useCaseInserir = useCaseInserir;
             //_useCaseAtualizar = useCaseAtualizar;
             _useCaseExcluir = useCaseExcluir;

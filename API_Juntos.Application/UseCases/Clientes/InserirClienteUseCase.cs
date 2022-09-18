@@ -1,4 +1,5 @@
 ﻿using API_Juntos.Application.Models.Cliente.InserirCliente;
+using API_Juntos.Application.Validations;
 using API_Juntos.Core.Entidades;
 using API_Juntos.Core.Repositorios;
 using AutoMapper;

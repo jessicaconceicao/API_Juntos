@@ -69,6 +69,7 @@ namespace API_e_commerce_Juntos
                 .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
              );
 
+           
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

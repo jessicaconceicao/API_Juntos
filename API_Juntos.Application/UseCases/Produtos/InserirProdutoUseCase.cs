@@ -1,4 +1,5 @@
 ﻿using API_Juntos.Application.Models.Produtos.InserirProduto;
+using API_Juntos.Application.Validations;
 using API_Juntos.Core.Entidades;
 using API_Juntos.Core.Repositorios;
 using AutoMapper;
@@ -36,10 +37,10 @@ namespace API_Juntos.Application.UseCases.Produtos
             if (request == null)
             { return null; }
 
-            var produto = _mapper.Map<Produto>(request); 
-            
-            await _repository.Inserir(produto); 
-            
+            var produto = _mapper.Map<Produto>(request);
+
+            await _repository.Inserir(produto);
+
             return new InserirProdutoResponse();
         }
 

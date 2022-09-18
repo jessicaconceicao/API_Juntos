@@ -23,5 +23,7 @@ namespace API_Juntos.Application.UseCases.Produtos
             var retorno = _mapper.Map<List<ListarProdutosResponse>>(produtos);
             return retorno;
         }
+
+        
     }
 }
