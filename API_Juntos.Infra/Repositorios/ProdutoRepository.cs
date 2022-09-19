@@ -41,6 +41,7 @@ namespace API_Juntos.Infra.Repositorios
                 .Where(x => x.IdProduto == id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
+            
         }
 
         public async Task<IEnumerable<Produto>> ListarTodos()

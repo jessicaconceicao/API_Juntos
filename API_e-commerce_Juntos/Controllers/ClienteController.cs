@@ -1,4 +1,5 @@
-﻿using API_Juntos.Application.Models.Cliente.ExcluirCliente;
+﻿using API_Juntos.Application.Models.Cliente.AtualizarCliente;
+using API_Juntos.Application.Models.Cliente.ExcluirCliente;
 using API_Juntos.Application.Models.Cliente.InserirCliente;
 using API_Juntos.Application.Models.Cliente.ListarClientePorId;
 using API_Juntos.Application.Models.Cliente.ListarClientes;
@@ -14,15 +15,15 @@ namespace API_e_commerce_Juntos.Controllers
     public class ClienteController : ControllerBase
     {
         public readonly IUseCaseAsync<InserirClienteRequest, InserirClienteResponse> _useCaseInserir;
-        //public readonly IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> _useCaseAtualizar;
+       // public readonly IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> _useCaseAtualizar;
         private readonly IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse> _useCaseExcluir;
-        private readonly IUseCaseAsync<ListarClientePorIdRequest, ListarClientePorIdResponse> _useCaseListarPorId;
+        private readonly IUseCaseAsync<int, ListarClientePorIdResponse> _useCaseListarPorId;
         private readonly IUseCaseAsync<ListarClientesRequest, List<ListarClientesResponse>> _useCaseListarUsuarios;
 
         public ClienteController(IUseCaseAsync<InserirClienteRequest, InserirClienteResponse> useCaseInserir,
-            /*IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> useCaseAtualizar,*/
+           /* IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> useCaseAtualizar,*/
             IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse> useCaseExcluir,
-            IUseCaseAsync<ListarClientePorIdRequest, ListarClientePorIdResponse> useCaseListarPorId,
+            IUseCaseAsync<int, ListarClientePorIdResponse> useCaseListarPorId,
             IUseCaseAsync<ListarClientesRequest, List<ListarClientesResponse>> useCaseListarUsuarios)
         {
             _useCaseInserir = useCaseInserir;
@@ -37,12 +38,13 @@ namespace API_e_commerce_Juntos.Controllers
         public async Task<ActionResult<InserirClienteResponse>> Post([FromBody] InserirClienteRequest request)
         {
             return await _useCaseInserir.ExecuteAsync(request); 
+            
         }
-        /* SE FOR DELETAR, APAGAR DA ID (IMPLEMENTAÇÃO CONTROLLER  E STARTUP)
-        [HttpPut("atualizacao_usuario/{id:int}")]
-        public async Task<ActionResult<AtualizarUsuarioResponse>> Put([FromRoute] int id) 
+        //SE FOR DELETAR, APAGAR DA ID (IMPLEMENTAÇÃO CONTROLLER  E STARTUP)
+        /*[HttpPut("atualizacao_usuario/{id:int}")]
+        public async Task<ActionResult<AtualizarClienteResponse>> Put([FromBody] AtualizarClienteRequest request) 
         {
-            return await _useCaseAtualizar.ExecuteAsync(new AtualizarUsuarioRequest() { Id = id }); //(NÃO ENTENDI MUITO BEM PORQUE SERIA DESTE MODO, AO INVÉS DE PASSAR UM REQUEST)
+            return await _useCaseAtualizar.ExecuteAsync(new AtualizarClienteRequest() { IdCliente = request.IdCliente }); //(NÃO ENTENDI MUITO BEM PORQUE SERIA DESTE MODO, AO INVÉS DE PASSAR UM REQUEST)
         }*/
 
         [HttpDelete("{id:int}")]
@@ -52,9 +54,13 @@ namespace API_e_commerce_Juntos.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ListarClientePorIdResponse>> Get([FromQuery] int id)
+        public async Task<ActionResult<ListarClientePorIdResponse>> Get(int id)
         {
-            return await _useCaseListarPorId.ExecuteAsync(new ListarClientePorIdRequest() { IdCliente = id });
+            var response = await _useCaseListarPorId.ExecuteAsync(id);
+            if (response == null)
+                return new NotFoundObjectResult("Cliente não encontrado");
+
+            return new OkObjectResult(response);
 
         }
 

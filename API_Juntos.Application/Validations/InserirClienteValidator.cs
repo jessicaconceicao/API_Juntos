@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace API_Juntos.Application.Validations
 {
 
-    public class InserirClienteRequestValidator : AbstractValidator<InserirClienteRequest>
+    public class AtualizarClienteRequestValidator : AbstractValidator<InserirClienteRequest>
     {
-        public InserirClienteRequestValidator()
+        public AtualizarClienteRequestValidator()
         {
             RuleFor(r => r.Nome)
                 .NotEmpty()

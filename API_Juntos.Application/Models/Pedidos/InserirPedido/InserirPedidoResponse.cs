@@ -2,5 +2,6 @@
 {
     public class InserirPedidoResponse
     {
+        public string Messagem { get; set; }
     }
 }

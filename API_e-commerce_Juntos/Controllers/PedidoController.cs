@@ -17,12 +17,12 @@ namespace API_e_commerce_Juntos.Controllers
         private readonly IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse> _useCaseInserir;
         //private readonly IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse> _useCaseAtualizar;
         private readonly IUseCaseAsync<ExcluirPedidoRequest, ExcluirPedidoResponse> _useCaseExcluir;
-        private readonly IUseCaseAsync<ListarPedidoPorIdRequest, ListarPedidoPorIdResponse> _useCaseListarPorId;
+        private readonly IUseCaseAsync<int, ListarPedidoPorIdResponse> _useCaseListarPorId;
         private readonly IUseCaseAsync<ListarPedidosRequest, List<ListarPedidosResponse>> _useCaseListarPedidos;
         public PedidoController(IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse> useCaseInserir,
            /* IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse> useCaseAtualizar,*/
             IUseCaseAsync<ExcluirPedidoRequest, ExcluirPedidoResponse> useCaseExcluir,
-            IUseCaseAsync<ListarPedidoPorIdRequest, ListarPedidoPorIdResponse> useCaseListarPorId,
+            IUseCaseAsync<int, ListarPedidoPorIdResponse> useCaseListarPorId,
             IUseCaseAsync<ListarPedidosRequest, List<ListarPedidosResponse>> useCaseListarPedidos)
         {
             _useCaseInserir = useCaseInserir;
@@ -58,7 +58,11 @@ namespace API_e_commerce_Juntos.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ListarPedidoPorIdResponse>> Get(int id)
         {
-            return await _useCaseListarPorId.ExecuteAsync(new ListarPedidoPorIdRequest { IdPedido = id });
+            var response = await _useCaseListarPorId.ExecuteAsync(id);
+            if (response == null)
+                return new NotFoundObjectResult("Pedido não encontrado");
+
+            return new OkObjectResult(response);
         }
 
         [HttpGet("listar_todos")]

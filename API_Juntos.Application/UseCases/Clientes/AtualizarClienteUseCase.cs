@@ -1,43 +1,51 @@
-﻿/*using API_Juntos.Application.Models.Cliente.AtualizarCliente;
-using API_Juntos.Core.Repositorios;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using API_Juntos.Application.Models.Cliente.AtualizarCliente;
+//using API_Juntos.Application.Validations;
+//using API_Juntos.Core.Entidades;
+//using API_Juntos.Core.Repositorios;
+//using AutoMapper;
+//using FluentValidation;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace API_Juntos.Application.UseCases.Clientes
-{
-    public class AtualizarUsuarioUseCase : IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse>
-    {
-        private readonly IUsuarioRepository _repository;
-        private readonly IMapper _mapper;
+//namespace API_Juntos.Application.UseCases.Clientes
+//{
+//    public class AtualizarClienteUseCase : IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse>
+//    {
+//        private readonly IClienteRepository _repository;
+//        private readonly IMapper _mapper;
 
-        public AtualizarUsuarioUseCase(IUsuarioRepository repository, IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
+//        public AtualizarClienteUseCase(IClienteRepository repository, IMapper mapper)
+//        {
+//            _repository = repository;
+//            _mapper = mapper;
+//        }
       
-        public async Task<AtualizarUsuarioResponse> ExecuteAsync(AtualizarUsuarioRequest request)
-        {
-            var usuario = await _repository.ListarPorIdParaAtualizar(request.IdCliente); //acessa o repositório para chamar o método listar por id para identificar os dados do usuário atualizar
-                                                                                  //é realmente necessário criar outro método? não poderia apenas listar por id para acessar qual vai modificar?
+//        public async Task<AtualizarClienteResponse> ExecuteAsync(AtualizarClienteRequest request)
+//        {
+//            if (request == null)
+//                return null;
+            
 
-            //como especificar o dado que vai atualizar de acordo com o que se deseja? colocar de cada propriedade???? 
-            //usuario.Nome = (?????);
-            //usuario.Email = (?????);
-            //usuario.Telefone = (?????);
-            //usuario.Endereco = (?????);
+//            var cliente = await _repository.ListarPorId(request.IdCliente); //acessa o repositório para chamar o método listar por id para identificar os dados do usuário atualizar
+//                                                                            //é realmente necessário criar outro método? não poderia apenas listar por id para acessar qual vai modificar?
 
-            //mapeamento??
+//            //como ficaria o mapeamento??? cliente = _mapper.Map<AtualizarClienteResponse, Cliente>(request);
+//            cliente.Nome = request.Nome;
+//            cliente.Email = request.Email;
+//            cliente.Telefone = request.Telefone;
+//            cliente.CPF = request.CPF;
+//            cliente.Endereco = request.Endereco;
 
-            await _repository.Atualizar(usuario); //ACESSA REPOSITÓRIO PARA CHAMAR MÉTODO DE ATUALIZAÇÃO
-            return new AtualizarUsuarioResponse();
+//            await _repository.Atualizar(cliente);
 
-        }
+//            var mensagemAtualizacao = new AtualizarClienteResponse();
+//            mensagemAtualizacao.Mensagem = "Atualização feita com sucesso!";
+//            return  mensagemAtualizacao;
 
-    }
-}
-*/
+//        }
+
+//    }
+//}

@@ -41,7 +41,9 @@ namespace API_Juntos.Application.UseCases.Pedidos
             await _repository.Inserir(pedido); //COMO ATRIBUIR DATETIME.NOW?????/
             pedido.DataPedido = DateTime.Now;
 
-            return new InserirPedidoResponse();
+            var pedidoResponse = new InserirPedidoResponse();
+            pedidoResponse.Messagem = "Pedido inserido com sucesso!";
+            return pedidoResponse;
 
         }
         

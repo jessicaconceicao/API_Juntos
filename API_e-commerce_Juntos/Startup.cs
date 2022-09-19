@@ -1,4 +1,5 @@
 using API_Juntos.Application.Mappings;
+using API_Juntos.Application.Models.Cliente.AtualizarCliente;
 using API_Juntos.Application.Models.Cliente.ExcluirCliente;
 using API_Juntos.Application.Models.Cliente.InserirCliente;
 using API_Juntos.Application.Models.Cliente.ListarClientePorId;
@@ -49,17 +50,17 @@ namespace API_e_commerce_Juntos
             services.AddTransient<IUseCaseAsync<InserirClienteRequest, InserirClienteResponse>, InserirClienteUseCase>();
             //services.AddTransient<IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse>, AtualizarClienteUseCase>();
             services.AddTransient<IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse>, ExcluirClienteUseCase>();
-            services.AddTransient<IUseCaseAsync<ListarClientePorIdRequest, ListarClientePorIdResponse>, ListarClientePorIdUseCase>();
+            services.AddTransient<IUseCaseAsync<int, ListarClientePorIdResponse>, ListarClientePorIdUseCase>();
             services.AddTransient<IUseCaseAsync<ListarClientesRequest, List<ListarClientesResponse>>, ListarClientesUseCase>();
             services.AddTransient<IUseCaseAsync<InserirProdutoRequest, InserirProdutoResponse>, InserirProdutoUseCase>();
             //services.AddTransient<IUseCaseAsync<AtualizarProdutoRequest, AtualizarProdutoResponse>, AtualizarProdutoUseCase>();
             services.AddTransient<IUseCaseAsync<ExcluirProdutoRequest, ExcluirProdutoResponse>, ExcluirProdutoUseCase>();
-            services.AddTransient<IUseCaseAsync<ListarProdutoPorIdRequest, ListarProdutoPorIdResponse>, ListarProdutoPorIdUseCase>();
+            services.AddTransient<IUseCaseAsync<int, ListarProdutoPorIdResponse>, ListarProdutoPorIdUseCase>();
             services.AddTransient<IUseCaseAsync<ListarProdutosRequest, List<ListarProdutosResponse>>, ListarProdutosUseCase>();
             services.AddTransient<IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse>, InserirPedidoUseCase>();
             // services.AddTransient<IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse>, AtualizarPedidoUseCase>();
             services.AddTransient<IUseCaseAsync<ExcluirPedidoRequest, ExcluirPedidoResponse>, ExcluirPedidoUseCase>();
-            services.AddTransient<IUseCaseAsync<ListarPedidoPorIdRequest, ListarPedidoPorIdResponse>, ListarPedidoPorIdUseCase>();
+            services.AddTransient<IUseCaseAsync<int, ListarPedidoPorIdResponse>, ListarPedidoPorIdUseCase>();
             services.AddTransient<IUseCaseAsync<ListarPedidosRequest, List<ListarPedidosResponse>>, ListarPedidosUseCase>();
 
             services.AddAutoMapper(typeof(MappingProfile));

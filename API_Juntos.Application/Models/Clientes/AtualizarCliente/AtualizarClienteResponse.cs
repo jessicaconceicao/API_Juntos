@@ -2,5 +2,6 @@
 {
     public class AtualizarClienteResponse
     {
+        public string Mensagem { get; set; }
     }
 }

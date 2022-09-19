@@ -1,4 +1,5 @@
-﻿using API_Juntos.Application.Models.Cliente.InserirCliente;
+﻿using API_Juntos.Application.Models.Cliente.AtualizarCliente;
+using API_Juntos.Application.Models.Cliente.InserirCliente;
 using API_Juntos.Application.Models.Cliente.ListarClientePorId;
 using API_Juntos.Application.Models.Cliente.ListarClientes;
 using API_Juntos.Application.Models.Pedidos.InserirPedido;

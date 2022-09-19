@@ -2,5 +2,6 @@
 {
     public class InserirProdutoResponse
     {
+        public string Messagem { get; set; }
     }
 }

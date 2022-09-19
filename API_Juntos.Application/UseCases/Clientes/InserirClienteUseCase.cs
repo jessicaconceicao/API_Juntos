@@ -21,7 +21,7 @@ namespace API_Juntos.Application.UseCases.Clientes
 
         public async Task<InserirClienteResponse> ExecuteAsync(InserirClienteRequest request)
         {
-            var validator = new InserirClienteRequestValidator();
+            var validator = new AtualizarClienteRequestValidator();
             var validatorResults = validator.Validate(request);
 
             if (!validatorResults.IsValid)
@@ -39,8 +39,11 @@ namespace API_Juntos.Application.UseCases.Clientes
             var cliente = _mapper.Map<Cliente>(request);
 
             await _repository.Inserir(cliente); 
+
+            var clienteResponse = new InserirClienteResponse();
+            clienteResponse.Messagem = "Cliente inserido com sucesso!";
+            return clienteResponse;
             
-            return new InserirClienteResponse();
         }
     }
 }

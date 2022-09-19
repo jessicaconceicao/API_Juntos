@@ -2,5 +2,6 @@
 {
     public class ExcluirPedidoResponse
     {
+        public string Messagem { get; set; }
     }
 }

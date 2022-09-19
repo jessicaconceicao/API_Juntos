@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API_Juntos.Application.UseCases.Clientes
 {
-    public class ListarClientePorIdUseCase : IUseCaseAsync<ListarClientePorIdRequest, ListarClientePorIdResponse>
+    public class ListarClientePorIdUseCase : IUseCaseAsync<int, ListarClientePorIdResponse>
     {
         private readonly IClienteRepository _repository;
         private readonly IMapper _mapper;
@@ -16,15 +16,15 @@ namespace API_Juntos.Application.UseCases.Clientes
             _mapper = mapper;
         }
 
-        public async Task<ListarClientePorIdResponse> ExecuteAsync(ListarClientePorIdRequest request)
+        public async Task<ListarClientePorIdResponse> ExecuteAsync(int request)
         {
-            var cliente = await _repository.ListarPorId(request.IdCliente);
+            var cliente = await _repository.ListarPorId(request);
 
             var retorno = (ListarClientePorIdResponse)null; 
             
             if (cliente != null)
             {
-                retorno = _mapper.Map<ListarClientePorIdResponse>(retorno);
+                retorno = _mapper.Map<ListarClientePorIdResponse>(cliente);
             }
 
             return await Task.FromResult(retorno);

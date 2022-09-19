@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API_Juntos.Application.UseCases.Pedidos
 {
-    public class ListarPedidoPorIdUseCase : IUseCaseAsync<ListarPedidoPorIdRequest, ListarPedidoPorIdResponse>
+    public class ListarPedidoPorIdUseCase : IUseCaseAsync<int, ListarPedidoPorIdResponse>
     {
         private readonly IPedidoRepository _repository;
         private readonly IMapper _mapper;
@@ -16,15 +16,17 @@ namespace API_Juntos.Application.UseCases.Pedidos
             _mapper = mapper;
         }
 
-        public async Task<ListarPedidoPorIdResponse> ExecuteAsync(ListarPedidoPorIdRequest request)
+        public async Task<ListarPedidoPorIdResponse> ExecuteAsync(int request)
         {
-            var pedido = await _repository.ListarPorId(request.IdPedido);
+            var pedido = await _repository.ListarPorId(request);
 
             var retorno = (ListarPedidoPorIdResponse)null;
+
             if (pedido != null)
             {
-                retorno = _mapper.Map<ListarPedidoPorIdResponse>(retorno);
+                retorno = _mapper.Map<ListarPedidoPorIdResponse>(pedido);
             }
+
             return await Task.FromResult(retorno);
         }
     }

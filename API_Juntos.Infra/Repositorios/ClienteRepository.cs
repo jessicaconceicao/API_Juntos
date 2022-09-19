@@ -19,10 +19,11 @@ namespace API_Juntos.Infra.Repositorios
             _context = context;
         }
 
-        /* public async Task Atualizar(Usuario obj)
+        public async Task Atualizar(Cliente obj)
          {
-             throw new NotImplementedException();
-         }*/
+            _context.Update(obj);
+            _context.SaveChanges();
+        }
 
         public async Task Excluir(Cliente obj)
         {

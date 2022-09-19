@@ -2,6 +2,6 @@
 {
     public class InserirClienteResponse
     {
-        
+        public string Messagem { get; set; }
     }
 }

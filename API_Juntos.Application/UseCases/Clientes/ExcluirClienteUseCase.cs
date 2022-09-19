@@ -17,8 +17,10 @@ namespace API_Juntos.Application.UseCases.Clientes
         public async Task<ExcluirClienteResponse> ExecuteAsync(ExcluirClienteRequest request)
         {
             var cliente = await _repository.ListarPorId(request.IdCliente); 
-            await _repository.Excluir(cliente); 
-            return new ExcluirClienteResponse(); 
+            await _repository.Excluir(cliente);
+            var clienteResponse = new ExcluirClienteResponse();
+            clienteResponse.Messagem = "Cliente excluído do sistema.";
+            return clienteResponse;
 
         }
     }

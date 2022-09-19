@@ -2,5 +2,6 @@
 {
     public class ExcluirProdutoResponse
     {
+        public string Messagem { get; set; }
     }
 }
