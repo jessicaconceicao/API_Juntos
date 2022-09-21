@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace API_Juntos.Infra.Repositorios
 {
     public class PedidoRepository : IPedidoRepository
@@ -28,7 +29,7 @@ namespace API_Juntos.Infra.Repositorios
             _context.SaveChanges();
         }
 
-        public async Task Inserir(Pedido obj) 
+        public async Task Inserir(Pedido obj)
         {
             _context.Add(obj);
             _context.SaveChanges();
@@ -38,8 +39,9 @@ namespace API_Juntos.Infra.Repositorios
         {
             return await _context
                 .Pedidos
+                .Include(x => x.ProdutosDoPedido)
+                    .ThenInclude(x => x.Produto)
                 .Where(p => p.IdPedido == id)
-                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
@@ -47,7 +49,8 @@ namespace API_Juntos.Infra.Repositorios
         {
             return await _context
                 .Pedidos
-                .Include(i => i.Cliente)
+                .Include(x => x.ProdutosDoPedido)
+                    .ThenInclude(x => x.Produto)
                 .AsNoTracking()
                 .ToListAsync();
         }

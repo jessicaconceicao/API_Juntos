@@ -11,21 +11,23 @@ namespace API_Juntos.Infra.Database
             builder.ToTable("produtos");
             builder.HasKey(pk => pk.IdProduto);
             builder.Property(p => p.Nome)
-                .HasColumnType("VARCHAR(20)")
+                .HasColumnType("VARCHAR(30)")
                 .IsRequired();
             builder.Property(p => p.Lote)
                 .HasColumnType("VARCHAR(15)")
                 .IsRequired();
             builder.Property(P => P.Validade)
-                .HasColumnType("VARCHAR(10)")
+                .HasColumnType("VARCHAR(15)")
                 .IsRequired();
             builder.Property(p => p.QuantidadeEmbalagem)
-                .HasColumnType("DECIMAL");
+                .HasColumnType("DECIMAL(10,2)");
+            builder.Property(p => p.UnidadeMedida)
+                .HasColumnType("VARCHAR(15)")
+                .IsRequired();
             builder.Property(p => p.Valor)
-                .HasColumnType("DECIMAL")
+                .HasColumnType("DECIMAL(10,2)")
                 .IsRequired();
             builder.Property(p => p.QuantidadeEstoque)
-                .HasColumnType("DECIMAL")
                 .IsRequired();
         }
     }

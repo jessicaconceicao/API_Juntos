@@ -34,14 +34,14 @@ namespace API_Juntos.Infra.Repositorios
             _context.SaveChanges();
         }
 
-        public async Task<Produto> ListarPorId(int id) 
+        public async Task<Produto> ListarPorId(int id)
         {
             return await _context
                 .Produtos
                 .Where(x => x.IdProduto == id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
-            
+
         }
 
         public async Task<IEnumerable<Produto>> ListarTodos()

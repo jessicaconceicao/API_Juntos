@@ -8,9 +8,18 @@ namespace API_Juntos.Core.Entidades
         public int IdPedido { get; set; }
         public decimal ValorPedido { get; set; }
         public DateTime DataPedido { get; set; }
-        public List<ProdutosDoPedido> ProdutosDoPedido { get; set; } 
-        public int IdCliente { get; set; }
+        public int IdCliente { get; set; } 
         public Cliente Cliente { get; set; }
-            
+        public DateTime Now { get; }
+        public List<ProdutosDoPedido> ProdutosDoPedido { get; }
+
+        public Pedido(DateTime dataPedido, List<ProdutosDoPedido> produtosDoPedido, int idCliente)
+        {
+            DataPedido = dataPedido;
+            ProdutosDoPedido = produtosDoPedido;
+            IdCliente = idCliente;
+        }
+
+        
     }
 }

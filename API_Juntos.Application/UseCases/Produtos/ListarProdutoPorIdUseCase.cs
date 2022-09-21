@@ -29,9 +29,9 @@ namespace API_Juntos.Application.UseCases.Produtos
             }
 
             return await Task.FromResult(retorno);
-            
+
             //qual mais adequado?
-           //var produto =  _repository.ListarPorId(request).Result;
+            //var produto =  _repository.ListarPorId(request).Result;
 
             //var retorno = (ListarProdutoPorIdResponse)null;
 

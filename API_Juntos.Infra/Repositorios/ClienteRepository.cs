@@ -20,7 +20,7 @@ namespace API_Juntos.Infra.Repositorios
         }
 
         public async Task Atualizar(Cliente obj)
-         {
+        {
             _context.Update(obj);
             _context.SaveChanges();
         }
@@ -46,10 +46,10 @@ namespace API_Juntos.Infra.Repositorios
                 .FirstOrDefaultAsync();
         }
 
-      /*  public async Task<Usuario> ListarPorIdParaAtualizar(int id)
-        {
-            throw new NotImplementedException();
-        }*/
+        /*  public async Task<Usuario> ListarPorIdParaAtualizar(int id)
+          {
+              throw new NotImplementedException();
+          }*/
 
         public async Task<IEnumerable<Cliente>> ListarTodos() //pertinente trazer os pedidos na busca??????
         {

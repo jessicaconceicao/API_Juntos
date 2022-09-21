@@ -1,5 +1,4 @@
-﻿using API_Juntos.Application.Models.Cliente.AtualizarCliente;
-using API_Juntos.Application.Models.Cliente.ExcluirCliente;
+﻿using API_Juntos.Application.Models.Cliente.ExcluirCliente;
 using API_Juntos.Application.Models.Cliente.InserirCliente;
 using API_Juntos.Application.Models.Cliente.ListarClientePorId;
 using API_Juntos.Application.Models.Cliente.ListarClientes;
@@ -15,13 +14,13 @@ namespace API_e_commerce_Juntos.Controllers
     public class ClienteController : ControllerBase
     {
         public readonly IUseCaseAsync<InserirClienteRequest, InserirClienteResponse> _useCaseInserir;
-       // public readonly IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> _useCaseAtualizar;
+        // public readonly IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> _useCaseAtualizar;
         private readonly IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse> _useCaseExcluir;
         private readonly IUseCaseAsync<int, ListarClientePorIdResponse> _useCaseListarPorId;
         private readonly IUseCaseAsync<ListarClientesRequest, List<ListarClientesResponse>> _useCaseListarUsuarios;
 
         public ClienteController(IUseCaseAsync<InserirClienteRequest, InserirClienteResponse> useCaseInserir,
-           /* IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> useCaseAtualizar,*/
+            /* IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse> useCaseAtualizar,*/
             IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse> useCaseExcluir,
             IUseCaseAsync<int, ListarClientePorIdResponse> useCaseListarPorId,
             IUseCaseAsync<ListarClientesRequest, List<ListarClientesResponse>> useCaseListarUsuarios)
@@ -37,8 +36,8 @@ namespace API_e_commerce_Juntos.Controllers
         [HttpPost]
         public async Task<ActionResult<InserirClienteResponse>> Post([FromBody] InserirClienteRequest request)
         {
-            return await _useCaseInserir.ExecuteAsync(request); 
-            
+            return await _useCaseInserir.ExecuteAsync(request);
+
         }
         //SE FOR DELETAR, APAGAR DA ID (IMPLEMENTAÇÃO CONTROLLER  E STARTUP)
         /*[HttpPut("atualizacao_usuario/{id:int}")]

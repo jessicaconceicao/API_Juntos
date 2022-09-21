@@ -1,5 +1,4 @@
-﻿using API_Juntos.Application.Models.Cliente.AtualizarCliente;
-using API_Juntos.Application.Models.Cliente.InserirCliente;
+﻿using API_Juntos.Application.Models.Cliente.InserirCliente;
 using API_Juntos.Application.Models.Cliente.ListarClientePorId;
 using API_Juntos.Application.Models.Cliente.ListarClientes;
 using API_Juntos.Application.Models.Pedidos.InserirPedido;
@@ -10,6 +9,7 @@ using API_Juntos.Application.Models.Produtos.ListarProdutoPorId;
 using API_Juntos.Application.Models.Produtos.ListarProdutos;
 using API_Juntos.Core.Entidades;
 using AutoMapper;
+using System;
 
 namespace API_Juntos.Application.Mappings
 {
@@ -44,6 +44,7 @@ namespace API_Juntos.Application.Mappings
                 .ForMember(dest => dest.Lote, fonte => fonte.MapFrom(src => src.Lote))
                 .ForMember(dest => dest.Validade, fonte => fonte.MapFrom(src => src.Validade))
                 .ForMember(dest => dest.QuantidadeEmbalagem, fonte => fonte.MapFrom(src => src.QuantidadeEmbalagem))
+                .ForMember(dest => dest.UnidadeMedida, fonte => fonte.MapFrom(src => src.UnidadeMedida))
                 .ForMember(dest => dest.Valor, fonte => fonte.MapFrom(src => src.Valor))
                 .ForMember(dest => dest.QuantidadeEstoque, fonte => fonte.MapFrom(src => src.QuantidadeEstoque));
 
@@ -53,6 +54,7 @@ namespace API_Juntos.Application.Mappings
                 .ForMember(dest => dest.Lote, fonte => fonte.MapFrom(src => src.Lote))
                 .ForMember(dest => dest.Validade, fonte => fonte.MapFrom(src => src.Validade))
                 .ForMember(dest => dest.QuantidadeEmbalagem, fonte => fonte.MapFrom(src => src.QuantidadeEmbalagem))
+                .ForMember(dest => dest.UnidadeMedida, fonte => fonte.MapFrom(src => src.UnidadeMedida))
                 .ForMember(dest => dest.Valor, fonte => fonte.MapFrom(src => src.Valor))
                 .ForMember(dest => dest.QuantidadeEstoque, fonte => fonte.MapFrom(src => src.QuantidadeEstoque));
 
@@ -62,34 +64,59 @@ namespace API_Juntos.Application.Mappings
                 .ForMember(dest => dest.Lote, fonte => fonte.MapFrom(src => src.Lote))
                 .ForMember(dest => dest.Validade, fonte => fonte.MapFrom(src => src.Validade))
                 .ForMember(dest => dest.QuantidadeEmbalagem, fonte => fonte.MapFrom(src => src.QuantidadeEmbalagem))
+                .ForMember(dest => dest.UnidadeMedida, fonte => fonte.MapFrom(src => src.UnidadeMedida))
                 .ForMember(dest => dest.Valor, fonte => fonte.MapFrom(src => src.Valor))
                 .ForMember(dest => dest.QuantidadeEstoque, fonte => fonte.MapFrom(src => src.QuantidadeEstoque));
-              
-            CreateMap<InserirPedidoRequest, Pedido>()
-                //.ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => src.DataPedido)) se colocar pelo sistema não mapeia!
-                .ForMember(dest => dest.IdCliente, fonte => fonte.MapFrom(src => src.IdCliente))
-                .ForMember(dest => dest.ProdutosDoPedido, fonte => fonte.MapFrom(src => src.ProdutosDoPedido));
 
-            //seria assim? como colocar as demais infos (lista de ProdutosDoPedido??????? o valor é gerado internamente, o que entraria aqui?
+                CreateMap<Cliente, ListarPedidoPorIdClienteResponse>(); //
 
-            CreateMap<Pedido, ListarPedidoPorIdResponse>()
-                .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido))
-                .ForMember(dest => dest.ValorPedido, fonte => fonte.MapFrom(src => src.ValorPedido))
-                .ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => src.DataPedido))
-                .ForMember(dest => dest.ProdutosDoPedido, fonte => fonte.MapFrom(src => src.ProdutosDoPedido))
-                .ForMember(dest => dest.IdCliente, fonte => fonte.MapFrom(src => src.IdCliente));
+                CreateMap<ProdutosDoPedido, ProdutosDetalhadosResponse>()
+                    .ForMember(dest => dest.NomeProduto, fonte => fonte.MapFrom(src => src.Produto.Nome))
+                   // .ForMember(dest => dest.Quantidade, fonte => fonte.MapFrom(src => src.Quantidade))
+                    .ForMember(dest => dest.ValorUnitario, fonte => fonte.MapFrom(src => src.Produto.Valor)); //acessa através da chave estrangeira e obtém o valor do produto
+                
+                CreateMap<Pedido, ListarPedidoPorIdResponse>()
+                   .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido)); //mantém?
+               
+                CreateMap<ListarPedidoPorIdRequest, Pedido>()
+                        .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido)); //mantém?
 
-            CreateMap<Pedido, ListarPedidosResponse>()
-                .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido))
-                .ForMember(dest => dest.ValorPedido, fonte => fonte.MapFrom(src => src.ValorPedido))
-                .ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => src.DataPedido))
-                .ForMember(dest => dest.ProdutosDoPedido, fonte => fonte.MapFrom(src => src.ProdutosDoPedido))
-                .ForMember(dest => dest.IdCliente, fonte => fonte.MapFrom(src => src.IdCliente));
+                CreateMap<Pedido, ListarPedidoPorIdResponse>()
+                    .ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => src.DataPedido))
+                    .ForMember(dest => dest.Cliente, fonte => fonte.MapFrom(src => src.Cliente))
+                    .ForMember(dest => dest.Produtos, fonte => fonte.MapFrom(src => src.ProdutosDoPedido));
 
 
-            
+
+
+            //CreateMap<InserirPedidoRequest, Pedido>()
+            //    .ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => DateTime.Now))
+            //    .ForMember(dest => dest.IdCliente, fonte => fonte.MapFrom(src => src.IdCliente))
+            //    .ForMember(dest => dest.ProdutosDoPedido, fonte => fonte.MapFrom(src => src.ProdutosDoPedido));
+
+            //CreateMap<ProdutosDoPedidoRequest, ProdutosDoPedido>()
+            //    .ForMember(dest => dest.IdProduto, fonte => fonte.MapFrom(src => src.IdProduto))
+            //    .ForMember(dest => dest.Quantidade, fonte => fonte.MapFrom(src => src.Quantidade));
+
+            //CreateMap<Pedido, ListarPedidoPorIdResponse>()
+            //    .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido))
+            //    .ForMember(dest => dest.ValorPedido, fonte => fonte.MapFrom(src => src.ValorPedido))
+            //    .ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => src.DataPedido))
+            //    .ForMember(dest => dest.ProdutosDoPedido, fonte => fonte.MapFrom(src => src.ProdutosDoPedido))
+            //    .ForMember(dest => dest.IdCliente, fonte => fonte.MapFrom(src => src.IdCliente));
+
+
+            //CreateMap<Pedido, ListarPedidosResponse>()
+            //    .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido))
+            //    .ForMember(dest => dest.ValorPedido, fonte => fonte.MapFrom(src => src.ValorPedido))
+            //    .ForMember(dest => dest.DataPedido, fonte => fonte.MapFrom(src => src.DataPedido))
+            //    .ForMember(dest => dest.ProdutosDoPedido, fonte => fonte.MapFrom(src => src.ProdutosDoPedido))
+            //    .ForMember(dest => dest.IdCliente, fonte => fonte.MapFrom(src => src.IdCliente));
+
+
+
 
 
         }
-    }
+}
 }

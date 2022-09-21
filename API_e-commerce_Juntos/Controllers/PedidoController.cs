@@ -1,4 +1,4 @@
-﻿using API_Juntos.Application.Models.Pedidos.AtualizarPedido;
+﻿//using API_Juntos.Application.Models.Pedidos.AtualizarPedido;
 using API_Juntos.Application.Models.Pedidos.ExcluirPedidos;
 using API_Juntos.Application.Models.Pedidos.InserirPedido;
 using API_Juntos.Application.Models.Pedidos.ListarPedidoPorId;
@@ -20,7 +20,7 @@ namespace API_e_commerce_Juntos.Controllers
         private readonly IUseCaseAsync<int, ListarPedidoPorIdResponse> _useCaseListarPorId;
         private readonly IUseCaseAsync<ListarPedidosRequest, List<ListarPedidosResponse>> _useCaseListarPedidos;
         public PedidoController(IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse> useCaseInserir,
-           /* IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse> useCaseAtualizar,*/
+             //IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse> useCaseAtualizar,
             IUseCaseAsync<ExcluirPedidoRequest, ExcluirPedidoResponse> useCaseExcluir,
             IUseCaseAsync<int, ListarPedidoPorIdResponse> useCaseListarPorId,
             IUseCaseAsync<ListarPedidosRequest, List<ListarPedidosResponse>> useCaseListarPedidos)
@@ -37,7 +37,6 @@ namespace API_e_commerce_Juntos.Controllers
         {
             return await _useCaseInserir.ExecuteAsync(request);
 
-            //como colocar um retorno confirmando a inserção do registro?
             //var inserir = await _useCaseInserir.ExecuteAsync(request);
             //return Ok(inserir);
 

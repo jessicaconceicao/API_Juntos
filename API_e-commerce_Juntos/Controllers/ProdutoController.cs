@@ -1,10 +1,8 @@
-﻿using API_Juntos.Application.Models.Produtos.AtualizarProduto;
-using API_Juntos.Application.Models.Produtos.ExcluirProduto;
+﻿using API_Juntos.Application.Models.Produtos.ExcluirProduto;
 using API_Juntos.Application.Models.Produtos.InserirProduto;
 using API_Juntos.Application.Models.Produtos.ListarProdutoPorId;
 using API_Juntos.Application.Models.Produtos.ListarProdutos;
 using API_Juntos.Application.UseCases;
-using API_Juntos.Application.UseCases.Produtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,15 +18,15 @@ namespace API_e_commerce_Juntos.Controllers
         private readonly IUseCaseAsync<ExcluirProdutoRequest, ExcluirProdutoResponse> _useCaseExcluir;
         private readonly IUseCaseAsync<int, ListarProdutoPorIdResponse> _useCaseListarPorId;
         private readonly IUseCaseAsync<ListarProdutosRequest, List<ListarProdutosResponse>> _useCaseListarProdutos;
-        
+
 
         public ProdutoController(IUseCaseAsync<InserirProdutoRequest, InserirProdutoResponse> useCaseInserir,
-           /* IUseCaseAsync<AtualizarProdutoRequest, AtualizarProdutoResponse> useCaseAtualizar,*/
+            /* IUseCaseAsync<AtualizarProdutoRequest, AtualizarProdutoResponse> useCaseAtualizar,*/
             IUseCaseAsync<ExcluirProdutoRequest, ExcluirProdutoResponse> useCaseExcluir,
             IUseCaseAsync<int, ListarProdutoPorIdResponse> useCaseListarPorId,
             IUseCaseAsync<ListarProdutosRequest, List<ListarProdutosResponse>> useCaseListarProdutos)
         {
-            
+
             _useCaseInserir = useCaseInserir;
             //_useCaseAtualizar = useCaseAtualizar;
             _useCaseExcluir = useCaseExcluir;
@@ -70,7 +68,7 @@ namespace API_e_commerce_Juntos.Controllers
         [HttpGet("listar_todos")]
         public async Task<ActionResult<List<ListarProdutosResponse>>> Get([FromQuery] ListarProdutosRequest request)
         {
-            return await _useCaseListarProdutos.ExecuteAsync(request); //é preciso manter o request acima???
+            return await _useCaseListarProdutos.ExecuteAsync(request);
         }
 
     }

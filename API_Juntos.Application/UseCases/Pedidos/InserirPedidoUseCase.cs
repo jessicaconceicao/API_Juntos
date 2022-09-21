@@ -4,7 +4,84 @@ using API_Juntos.Core.Entidades;
 using API_Juntos.Core.Repositorios;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+
+
+
+//namespace API_Juntos.Application.UseCases.Pedidos
+//{
+//    public class InserirPedidoUseCase : IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse>
+//    {
+//        private readonly IPedidoRepository _pedidoRepository;
+//        private readonly IProdutosDoPedidoRepository _produtosDoPedidoRepository;
+//        private readonly IProdutoRepository _produtoRepository;
+//        private readonly IMapper _mapper;
+
+//        public InserirPedidoUseCase(IPedidoRepository pedidoRepository,
+//            IProdutosDoPedidoRepository produtosDoPedidoRepository,
+//            IProdutoRepository produtoRepository,
+//            IMapper mapper)
+//        {
+//            _pedidoRepository = pedidoRepository;
+//            _produtosDoPedidoRepository = produtosDoPedidoRepository;
+//            _produtoRepository = produtoRepository;
+//            _mapper = mapper;
+//        }
+
+//        public async Task<InserirPedidoResponse> ExecuteAsync(InserirPedidoRequest request)
+//        {
+//            if (request == null)
+//            { return null; }
+
+//            List<Produto> produtoList = new List<Produto>();
+//            decimal ValorPedido = 0;
+
+//            foreach(var item in request.ProdutosSolicitados)
+//            {
+//                var produtoSolicitado = await  _produtoRepository.ListarPorId(item.IdProduto); //pega o id do request e passa para buscar produto por id
+//                var valorTotalProduto = produtoSolicitado.Valor * item.Quantidade; //pq n tá acessando o valor do produto encontrado pelo id??? //acessa o valor do produto encontrado e multiplica pela qnt vinda do request 
+//                ValorPedido += valorTotalProduto; //acrescenta o valor obtido ao total do pedido
+//                produtoList.Add(produtoSolicitado); //adiciona o produto encontrado à lista de produtos criada
+//            }
+
+
+
+//            //cria objeto do tipo ProdutosDoPedido
+//            ProdutosDoPedido  produtoDoPedido = new ProdutosDoPedido
+//            {
+//                //Quantidade = request.ProdutosSolicitados.,
+//                ValorTotal = ValorPedido,
+//                Produtos = produtoList
+
+//            };
+
+//            //mapeia???? var produtodoPedido = _mapper.Map<ProdutosDoPedido>(tem dados vindos so request e outros locais. como ficaria?);
+//            _produtosDoPedidoRepository.Inserir(produtoDoPedido); //espera entidade
+
+//            var pedido = new
+//            {
+//                ValorPedido = ValorPedido,
+//                DataPedido = DateTime.Now,
+//                IdCliente = request.IdCliente
+//                //o id deveria ser gerado pelo banco
+//            };
+//            _pedidoRepository.Inserir(pedido);
+
+
+
+
+//            var pedidoResponse = new InserirPedidoResponse();
+//            pedidoResponse.Messagem = "Pedido inserido com sucesso!";
+//            return pedidoResponse;
+
+
+//        }
+//    }
+//}
+
+
 
 namespace API_Juntos.Application.UseCases.Pedidos
 {
@@ -36,16 +113,37 @@ namespace API_Juntos.Application.UseCases.Pedidos
             if (request == null)
             { return null; }
 
-            var pedido = _mapper.Map<Pedido>(request);
+            var produtosDosPedidos = new List<ProdutosDoPedido>();
 
-            await _repository.Inserir(pedido); //COMO ATRIBUIR DATETIME.NOW?????/
-            pedido.DataPedido = DateTime.Now;
+            foreach (var produtos in request.Produtos)
+                produtosDosPedidos.Add(new ProdutosDoPedido(produtos.IdProduto, produtos.Quantidade));
+
+           // var pedido = new Pedido(DateTime.Now, request.IdCliente, pedidoProdutos);
+
+            //foreach (var qtd in request.QuantidadeProduto)
+            //    foreach (var produtoId in request.IdProduto)
+            //        produtosDosPedidos.Add(new ProdutosDoPedido(qtd,produtoId));
+
+            //erro: System.InvalidOperationException: No suitable constructor was found for entity type 'Pedido'.
+            //The following constructors had parameters that could not be bound to properties of the entity type:
+            //cannot bind 'produtosDoPedido' in 'Pedido(DateTime dataPedido, List<ProdutosDoPedido> produtosDoPedido, int idCliente)'.
+
+            var pedido = new Pedido(DateTime.Now, produtosDosPedidos, request.IdCliente);
+
+            await _repository.Inserir(pedido);
+
+            //var pedido = _mapper.Map<Pedido>(request);
+
+            //pedido.ValorPedido = pedido.ProdutosDoPedido.Sum(s => s.ValorTotal * s.Quantidade);
+
+            //await _repository.Inserir(pedido); 
+
 
             var pedidoResponse = new InserirPedidoResponse();
-            pedidoResponse.Messagem = "Pedido inserido com sucesso!";
+            pedidoResponse.Mensagem = "Pedido inserido com sucesso!";
             return pedidoResponse;
 
         }
-        
+
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Juntos.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220916140218_TabelaPedidos")]
-    partial class TabelaPedidos
+    [Migration("20220920183734_tabelas")]
+    partial class tabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,7 @@ namespace API_Juntos.Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorPedido")
-                        .HasColumnType("DECIMAL");
+                        .HasColumnType("DECIMAL(11,2)");
 
                     b.HasKey("IdPedido");
 
@@ -88,24 +88,56 @@ namespace API_Juntos.Infra.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(20)");
+                        .HasColumnType("VARCHAR(30)");
 
                     b.Property<decimal>("QuantidadeEmbalagem")
-                        .HasColumnType("DECIMAL");
+                        .HasColumnType("DECIMAL(10,2)");
 
-                    b.Property<decimal>("QuantidadeEstoque")
-                        .HasColumnType("DECIMAL");
+                    b.Property<int>("QuantidadeEstoque")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UnidadeMedida")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(15)");
 
                     b.Property<string>("Validade")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(10)");
+                        .HasColumnType("VARCHAR(15)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("DECIMAL");
+                        .HasColumnType("DECIMAL(10,2)");
 
                     b.HasKey("IdProduto");
 
                     b.ToTable("produtos");
+                });
+
+            modelBuilder.Entity("API_Juntos.Core.Entidades.ProdutosDoPedido", b =>
+                {
+                    b.Property<int>("IdProdutosDoPedido")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdPedido")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProduto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("DECIMAL(11,2)");
+
+                    b.HasKey("IdProdutosDoPedido");
+
+                    b.HasIndex("IdPedido");
+
+                    b.HasIndex("IdProduto");
+
+                    b.ToTable("produtosDosPedidos");
                 });
 
             modelBuilder.Entity("API_Juntos.Core.Entidades.Pedido", b =>
@@ -119,9 +151,38 @@ namespace API_Juntos.Infra.Migrations
                     b.Navigation("Cliente");
                 });
 
+            modelBuilder.Entity("API_Juntos.Core.Entidades.ProdutosDoPedido", b =>
+                {
+                    b.HasOne("API_Juntos.Core.Entidades.Pedido", "Pedido")
+                        .WithMany("ProdutosDoPedido")
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API_Juntos.Core.Entidades.Produto", "Produto")
+                        .WithMany("ProdutosDoPedido")
+                        .HasForeignKey("IdProduto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("API_Juntos.Core.Entidades.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
+                });
+
+            modelBuilder.Entity("API_Juntos.Core.Entidades.Pedido", b =>
+                {
+                    b.Navigation("ProdutosDoPedido");
+                });
+
+            modelBuilder.Entity("API_Juntos.Core.Entidades.Produto", b =>
+                {
+                    b.Navigation("ProdutosDoPedido");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,16 +11,15 @@ namespace API_Juntos.Infra.Database
             builder.ToTable("produtosDosPedidos");
             builder.HasKey(pk => pk.IdProdutosDoPedido);
             builder.Property(p => p.Quantidade)
-                .HasColumnType("DECIMAL")
                 .IsRequired();
-            builder.Property(p => p.ValorUnitario)
-                .HasColumnType("DECIMAL")
+            builder.Property(p => p.ValorTotal)
+                .HasColumnType("DECIMAL(11,2)")
                 .IsRequired();
             builder.HasOne(fk => fk.Pedido)
                 .WithMany(fk => fk.ProdutosDoPedido)
                 .HasForeignKey(fk => fk.IdPedido);
             builder.HasOne(fk => fk.Produto)
-                .WithMany(fk => fk.PodutosDoPedido)
+                .WithMany(fk => fk.ProdutosDoPedido)
                 .HasForeignKey(fk => fk.IdProduto);
 
         }

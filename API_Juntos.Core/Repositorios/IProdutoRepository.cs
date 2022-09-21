@@ -2,8 +2,8 @@
 
 namespace API_Juntos.Core.Repositorios
 {
-    public interface IProdutoRepository:IRepository<Produto>
+    public interface IProdutoRepository : IRepository<Produto>
     {
-        
+
     }
 }

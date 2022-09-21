@@ -20,8 +20,8 @@ namespace API_Juntos.Application.UseCases.Clientes
         {
             var cliente = await _repository.ListarPorId(request);
 
-            var retorno = (ListarClientePorIdResponse)null; 
-            
+            ListarClientePorIdResponse retorno = null;
+
             if (cliente != null)
             {
                 retorno = _mapper.Map<ListarClientePorIdResponse>(cliente);

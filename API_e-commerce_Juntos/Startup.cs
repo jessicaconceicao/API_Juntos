@@ -1,5 +1,4 @@
 using API_Juntos.Application.Mappings;
-using API_Juntos.Application.Models.Cliente.AtualizarCliente;
 using API_Juntos.Application.Models.Cliente.ExcluirCliente;
 using API_Juntos.Application.Models.Cliente.InserirCliente;
 using API_Juntos.Application.Models.Cliente.ListarClientePorId;
@@ -28,6 +27,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace API_e_commerce_Juntos
 {
@@ -47,18 +47,22 @@ namespace API_e_commerce_Juntos
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
+            services.AddTransient<IProdutosDoPedidoRepository, ProdutosDoPedidoRepository>();
+
             services.AddTransient<IUseCaseAsync<InserirClienteRequest, InserirClienteResponse>, InserirClienteUseCase>();
             //services.AddTransient<IUseCaseAsync<AtualizarClienteRequest, AtualizarClienteResponse>, AtualizarClienteUseCase>();
             services.AddTransient<IUseCaseAsync<ExcluirClienteRequest, ExcluirClienteResponse>, ExcluirClienteUseCase>();
             services.AddTransient<IUseCaseAsync<int, ListarClientePorIdResponse>, ListarClientePorIdUseCase>();
             services.AddTransient<IUseCaseAsync<ListarClientesRequest, List<ListarClientesResponse>>, ListarClientesUseCase>();
+
             services.AddTransient<IUseCaseAsync<InserirProdutoRequest, InserirProdutoResponse>, InserirProdutoUseCase>();
             //services.AddTransient<IUseCaseAsync<AtualizarProdutoRequest, AtualizarProdutoResponse>, AtualizarProdutoUseCase>();
             services.AddTransient<IUseCaseAsync<ExcluirProdutoRequest, ExcluirProdutoResponse>, ExcluirProdutoUseCase>();
             services.AddTransient<IUseCaseAsync<int, ListarProdutoPorIdResponse>, ListarProdutoPorIdUseCase>();
             services.AddTransient<IUseCaseAsync<ListarProdutosRequest, List<ListarProdutosResponse>>, ListarProdutosUseCase>();
+
             services.AddTransient<IUseCaseAsync<InserirPedidoRequest, InserirPedidoResponse>, InserirPedidoUseCase>();
-            // services.AddTransient<IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse>, AtualizarPedidoUseCase>();
+            //// services.AddTransient<IUseCaseAsync<AtualizarPedidoRequest, AtualizarPedidoResponse>, AtualizarPedidoUseCase>();
             services.AddTransient<IUseCaseAsync<ExcluirPedidoRequest, ExcluirPedidoResponse>, ExcluirPedidoUseCase>();
             services.AddTransient<IUseCaseAsync<int, ListarPedidoPorIdResponse>, ListarPedidoPorIdUseCase>();
             services.AddTransient<IUseCaseAsync<ListarPedidosRequest, List<ListarPedidosResponse>>, ListarPedidosUseCase>();
@@ -69,9 +73,9 @@ namespace API_e_commerce_Juntos
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
              );
-
            
             services.AddControllers();
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);//l
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API_e_commerce_Juntos", Version = "v1" });
@@ -88,7 +92,7 @@ namespace API_e_commerce_Juntos
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API_e_commerce_Juntos v1"));
             }
 
-            context.Database.Migrate();
+            //context.Database.Migrate();
 
             app.UseHttpsRedirection();
 

@@ -16,7 +16,7 @@ namespace API_Juntos.Infra.Database
             builder.ToTable("pedidos");
             builder.HasKey(pk => pk.IdPedido);
             builder.Property(p => p.ValorPedido)
-                .HasColumnType("DECIMAL")
+                .HasColumnType("DECIMAL(11,2)")
                 .IsRequired();
             builder.Property(p => p.DataPedido)
                 .HasColumnType("DATETIME")

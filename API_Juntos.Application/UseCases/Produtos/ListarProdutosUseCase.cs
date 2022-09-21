@@ -24,6 +24,6 @@ namespace API_Juntos.Application.UseCases.Produtos
             return retorno;
         }
 
-        
+
     }
 }

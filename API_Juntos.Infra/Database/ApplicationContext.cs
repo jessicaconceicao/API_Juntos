@@ -20,7 +20,7 @@ namespace API_Juntos.Infra.Database
             modelBuilder.ApplyConfiguration(new ClienteConfiguration());
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoConfiguration());
-            modelBuilder.ApplyConfiguration(new ProdutosDoPedidoConfiguration());
+           modelBuilder.ApplyConfiguration(new ProdutosDoPedidoConfiguration());
         }
     }
 }

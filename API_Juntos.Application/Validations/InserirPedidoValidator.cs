@@ -13,16 +13,18 @@ namespace API_Juntos.Application.Validations
     {
         public InserirPedidoRequestValidator()
         {
-            RuleFor(r => r.ProdutosDoPedido)
+            RuleFor(r => r.Produtos)
                  .NotEmpty()
-                 .WithMessage("Produtos do pedido não pode ser vazio.")
                  .NotNull()
-                 .WithMessage("Produtos do pedido não pode ser nulo.");
+                 .WithMessage("Produto deve ser informado");
+            //RuleFor(r => r.QuantidadeProduto)
+            //    .NotEmpty()
+            //    .NotNull()
+            //    .WithMessage("A quantidade do produto deve ser informada");
             RuleFor(r => r.IdCliente)
                 .NotEmpty()
-                .WithMessage("Id do cliente não pode ser vazio.")
                 .NotNull()
-                .WithMessage("Id do cliente não pode ser nulo.");
+                .WithMessage("Id do cliente deve ser informado");
         }
     }
 

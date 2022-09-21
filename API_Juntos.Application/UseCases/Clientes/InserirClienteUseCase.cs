@@ -38,12 +38,12 @@ namespace API_Juntos.Application.UseCases.Clientes
 
             var cliente = _mapper.Map<Cliente>(request);
 
-            await _repository.Inserir(cliente); 
+            await _repository.Inserir(cliente);
 
             var clienteResponse = new InserirClienteResponse();
             clienteResponse.Messagem = "Cliente inserido com sucesso!";
             return clienteResponse;
-            
+
         }
     }
 }

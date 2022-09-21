@@ -15,7 +15,7 @@ namespace API_Juntos.Application.UseCases.Produtos
 
         public async Task<ExcluirProdutoResponse> ExecuteAsync(ExcluirProdutoRequest request)
         {
-            var produto = await _repository.ListarPorId(request.IdProduto); 
+            var produto = await _repository.ListarPorId(request.IdProduto);
             await _repository.Excluir(produto);
             var produtoResponse = new ExcluirProdutoResponse();
             produtoResponse.Messagem = "Produto excluído do sistema.";

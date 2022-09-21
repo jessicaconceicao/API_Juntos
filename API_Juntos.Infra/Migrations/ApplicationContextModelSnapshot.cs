@@ -64,7 +64,7 @@ namespace API_Juntos.Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorPedido")
-                        .HasColumnType("DECIMAL");
+                        .HasColumnType("DECIMAL(11,2)");
 
                     b.HasKey("IdPedido");
 
@@ -86,20 +86,24 @@ namespace API_Juntos.Infra.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(20)");
+                        .HasColumnType("VARCHAR(30)");
 
                     b.Property<decimal>("QuantidadeEmbalagem")
-                        .HasColumnType("DECIMAL");
+                        .HasColumnType("DECIMAL(10,2)");
 
-                    b.Property<decimal>("QuantidadeEstoque")
-                        .HasColumnType("DECIMAL");
+                    b.Property<int>("QuantidadeEstoque")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UnidadeMedida")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(15)");
 
                     b.Property<string>("Validade")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(10)");
+                        .HasColumnType("VARCHAR(15)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("DECIMAL");
+                        .HasColumnType("DECIMAL(10,2)");
 
                     b.HasKey("IdProduto");
 
@@ -119,11 +123,11 @@ namespace API_Juntos.Infra.Migrations
                     b.Property<int>("IdProduto")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Quantidade")
-                        .HasColumnType("DECIMAL");
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("ValorUnitario")
-                        .HasColumnType("DECIMAL");
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("DECIMAL(11,2)");
 
                     b.HasKey("IdProdutosDoPedido");
 
@@ -154,7 +158,7 @@ namespace API_Juntos.Infra.Migrations
                         .IsRequired();
 
                     b.HasOne("API_Juntos.Core.Entidades.Produto", "Produto")
-                        .WithMany("PodutosDoPedido")
+                        .WithMany("ProdutosDoPedido")
                         .HasForeignKey("IdProduto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -176,7 +180,7 @@ namespace API_Juntos.Infra.Migrations
 
             modelBuilder.Entity("API_Juntos.Core.Entidades.Produto", b =>
                 {
-                    b.Navigation("PodutosDoPedido");
+                    b.Navigation("ProdutosDoPedido");
                 });
 #pragma warning restore 612, 618
         }

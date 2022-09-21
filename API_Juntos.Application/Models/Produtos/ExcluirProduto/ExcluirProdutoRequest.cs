@@ -2,6 +2,6 @@
 {
     public class ExcluirProdutoRequest
     {
-       public int IdProduto { get; set; }
+        public int IdProduto { get; set; }
     }
 }
