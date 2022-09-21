@@ -11,8 +11,8 @@ namespace API_Juntos.Infra.Migrations
                 name: "clientes",
                 columns: table => new
                 {
-                    IdCliente = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCliente = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     CPF = table.Column<string>(type: "VARCHAR(15)", nullable: false),
                     Email = table.Column<string>(type: "VARCHAR(50)", nullable: false),
@@ -28,15 +28,15 @@ namespace API_Juntos.Infra.Migrations
                 name: "produtos",
                 columns: table => new
                 {
-                    IdProduto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdProduto = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false),
                     Lote = table.Column<string>(type: "VARCHAR(15)", nullable: false),
                     Validade = table.Column<string>(type: "VARCHAR(15)", nullable: false),
                     QuantidadeEmbalagem = table.Column<decimal>(type: "DECIMAL(10,2)", nullable: false),
                     UnidadeMedida = table.Column<string>(type: "VARCHAR(15)", nullable: false),
                     Valor = table.Column<decimal>(type: "DECIMAL(10,2)", nullable: false),
-                    QuantidadeEstoque = table.Column<int>(type: "int", nullable: false)
+                    QuantidadeEstoque = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,11 +47,11 @@ namespace API_Juntos.Infra.Migrations
                 name: "pedidos",
                 columns: table => new
                 {
-                    IdPedido = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdPedido = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     ValorPedido = table.Column<decimal>(type: "DECIMAL(11,2)", nullable: false),
                     DataPedido = table.Column<DateTime>(type: "DATETIME", nullable: false),
-                    IdCliente = table.Column<int>(type: "int", nullable: false)
+                    IdCliente = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,12 +68,12 @@ namespace API_Juntos.Infra.Migrations
                 name: "produtosDosPedidos",
                 columns: table => new
                 {
-                    IdProdutosDoPedido = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    IdProdutosDoPedido = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Quantidade = table.Column<int>(type: "INTEGER", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "DECIMAL(11,2)", nullable: false),
-                    IdProduto = table.Column<int>(type: "int", nullable: false),
-                    IdPedido = table.Column<int>(type: "int", nullable: false)
+                    IdProduto = table.Column<int>(type: "INTEGER", nullable: false),
+                    IdPedido = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,9 +10,9 @@ namespace API_Juntos.Core.Entidades
         public DateTime DataPedido { get; set; }
         public int IdCliente { get; set; } 
         public Cliente Cliente { get; set; }
-        public DateTime Now { get; }
         public List<ProdutosDoPedido> ProdutosDoPedido { get; }
 
+        protected Pedido() { }
         public Pedido(DateTime dataPedido, List<ProdutosDoPedido> produtosDoPedido, int idCliente)
         {
             DataPedido = dataPedido;

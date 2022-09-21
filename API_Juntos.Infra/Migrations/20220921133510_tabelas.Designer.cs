@@ -3,30 +3,26 @@ using System;
 using API_Juntos.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API_Juntos.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220920183734_tabelas")]
+    [Migration("20220921133510_tabelas")]
     partial class tabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.17");
 
             modelBuilder.Entity("API_Juntos.Core.Entidades.Cliente", b =>
                 {
                     b.Property<int>("IdCliente")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -56,14 +52,13 @@ namespace API_Juntos.Infra.Migrations
                 {
                     b.Property<int>("IdPedido")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DataPedido")
                         .HasColumnType("DATETIME");
 
                     b.Property<int>("IdCliente")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("ValorPedido")
                         .HasColumnType("DECIMAL(11,2)");
@@ -79,8 +74,7 @@ namespace API_Juntos.Infra.Migrations
                 {
                     b.Property<int>("IdProduto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Lote")
                         .IsRequired()
@@ -94,7 +88,7 @@ namespace API_Juntos.Infra.Migrations
                         .HasColumnType("DECIMAL(10,2)");
 
                     b.Property<int>("QuantidadeEstoque")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UnidadeMedida")
                         .IsRequired()
@@ -116,17 +110,16 @@ namespace API_Juntos.Infra.Migrations
                 {
                     b.Property<int>("IdProdutosDoPedido")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("IdPedido")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("IdProduto")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantidade")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("DECIMAL(11,2)");

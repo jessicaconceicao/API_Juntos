@@ -69,13 +69,17 @@ namespace API_e_commerce_Juntos
 
             services.AddAutoMapper(typeof(MappingProfile));
 
+            //services.AddDbContext<ApplicationContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            //    .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+            // );
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
-             );
-           
+               options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+               .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+            );
+
             services.AddControllers();
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);//l
+            //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);//APAGAR
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API_e_commerce_Juntos", Version = "v1" });
@@ -92,7 +96,7 @@ namespace API_e_commerce_Juntos
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API_e_commerce_Juntos v1"));
             }
 
-            //context.Database.Migrate();
+            context.Database.Migrate();
 
             app.UseHttpsRedirection();
 

@@ -75,8 +75,8 @@ namespace API_Juntos.Application.Mappings
                    // .ForMember(dest => dest.Quantidade, fonte => fonte.MapFrom(src => src.Quantidade))
                     .ForMember(dest => dest.ValorUnitario, fonte => fonte.MapFrom(src => src.Produto.Valor)); //acessa através da chave estrangeira e obtém o valor do produto
                 
-                CreateMap<Pedido, ListarPedidoPorIdResponse>()
-                   .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido)); //mantém?
+                //CreateMap<Pedido, ListarPedidoPorIdResponse>()
+                //   .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido)); //mantém?
                
                 CreateMap<ListarPedidoPorIdRequest, Pedido>()
                         .ForMember(dest => dest.IdPedido, fonte => fonte.MapFrom(src => src.IdPedido)); //mantém?
