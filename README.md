@@ -2,7 +2,7 @@
 API para gerenciamento de pedidos, cadastro de produtos e clientes de uma plataforma de e-commerce.
 Projeto de conclusão de curso do programa Construdelas (Bootcamp promovido pela WoMakersCode em parceria com a empresa Juntos Somos Mais). 
 
-- BD:SQLite
+- BD:SQL Server
 - Ao rodar a aplicação as migrações de criação das tabelas e inserção de dados teste serão executadas.
 - Endpoints: 
            Clientes: POST, DELETE, LISTAR POR ID, LISTAR TODOS
